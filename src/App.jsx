@@ -9,6 +9,7 @@ import {
 }   
 from 'react-router-dom'; 
 import Home from './pages/Home';
+import MovieDetetails from './pages/MovieDetetails';
 
 
 function App() {
@@ -18,8 +19,8 @@ function App() {
     <Router>
       <Routes>  
         <Route exact path='/' element={< Home />}></Route>  
-        {/* <Route exact path='/about' element={< About />}></Route>  
-        <Route exact path='/contact' element={< Contact />}></Route>   */}
+        <Route exact path='/about/:id' element={< MovieDetetails />}></Route>  
+        {/* <Route exact path='/contact' element={< Contact />}></Route>   */}
       </Routes>
     </Router>
   )
