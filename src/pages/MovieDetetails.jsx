@@ -4,6 +4,8 @@ const MovieDetetails = () => {
 
     const params = useParams()
     console.log(params);
+
+    // url: https://api.tvmaze.com/shows/4658
   return (
     <div>MovieDetetails : {params.id} </div>
   )

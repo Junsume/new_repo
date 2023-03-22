@@ -6,10 +6,17 @@ import { MyContext } from "../context/contextProvider";
 
 function Home() {
   const [search, setsearch] = useContext(MyContext);
-  const [movies, setmovies] = useState([]);
+  const [movies, setmovies] = useState([
+    {id:"",
+      name: "",
+      summary: "",
+      image: "",
+    },
+  ]);
   console.log(search);
 
   useEffect(() => {
+    setmovies([]);
     async function searchMovie() {
       const result = await fetch(
         `https://api.tvmaze.com/search/shows?q=${search}`
@@ -18,7 +25,20 @@ function Home() {
           return res.json();
         })
         .then((response) => {
-          setmovies(response), console.log(response);
+          console.log(response);
+
+          response.map((show) => {
+            console.log(show);
+            setmovies([
+              ...movies,
+              {
+                id:show.show.id,
+                name: show.show.name,
+                summary: show.show.summary,
+                image: show.show.image.medium,
+              },
+            ]);
+          });
         });
     }
     searchMovie();
@@ -32,15 +52,18 @@ function Home() {
         </div>
         <div className="container " style={{ margin: "10px" }}>
           <div className="row">
-          {movies.map(mov => {return (
-            <div className="col">
-              {/* {}
-              {mov.show.type} */}
-
-              <MoviesCard name={mov.show.name} />
-            </div>
-          );
-            })}  
+            {movies.map((mov) => {
+              return (
+                <div className="col">
+                  <MoviesCard
+                  id={mov.id}
+                    name={mov.name}
+                    img={mov.image}
+                    summary={mov.summary}
+                  />
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
