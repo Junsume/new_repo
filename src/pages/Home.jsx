@@ -3,6 +3,7 @@ import { json } from "react-router-dom";
 import MoviesCard from "../components/MoviesCard";
 import Navbar from "../components/Navbar";
 import { MyContext } from "../context/contextProvider";
+import Allmovies from "../components/Allmovies";
 
 function Home() {
   const [search, setsearch] = useContext(MyContext);
@@ -45,18 +46,17 @@ function Home() {
   }, [search]);
 
   return (
-    <div className="row">
-      <div className="col">
-        <div className="col">
+    <div className="bg-success p-2 text-dark bg-opacity-10">
+        <div className="row">
           <Navbar />
         </div>
-        <div className="container " style={{ margin: "10px" }}>
-          <div className="row">
+        <div className="row container " style={{ margin: "70px 20px 10px 20px" }}>
+          <div className="row m-2 p-4">
             {movies.map((mov) => {
               return (
-                <div className="col">
+                <div className="col m-1 p-1">
                   <MoviesCard
-                  id={mov.id}
+                    id={mov.id}
                     name={mov.name}
                     img={mov.image}
                     summary={mov.summary}
@@ -65,8 +65,12 @@ function Home() {
               );
             })}
           </div>
+          <div className="row" >
+            <div className="col-12">
+              <Allmovies/>
+            </div>
+          </div>
         </div>
-      </div>
     </div>
   );
 }
